@@ -19,9 +19,9 @@ CREATE TABLE dbo.Users
 CREATE TABLE dbo.Passwords
 (
     PasswordID INT IDENTITY(1,1),
-    UserID INT,
-    PreviousPassword VARCHAR(50), /* Check user hasn't used password before ? */
-    TimeChanged DATETIME
+    UserID INT NOT NULL,
+    PreviousPassword VARCHAR(50) NOT NULL, /* Check user hasn't used password before ? */
+    TimeChanged DATETIME NOT NULL
 
     CONSTRAINT pk_Passwords PRIMARY KEY (PasswordID)
 
@@ -32,8 +32,8 @@ CREATE TABLE dbo.Passwords
 CREATE TABLE dbo.Sessions
 (
     SessionID INT IDENTITY(1,1),
-    UserID INT,
-    SessionTime DATETIME
+    UserID INT NOT NULL,
+    SessionTime DATETIME NOT NULL
 
     CONSTRAINT pk_Sessions PRIMARY KEY (SessionID)
 
