@@ -7,7 +7,7 @@ CREATE TABLE dbo.Users
     FirstName VARCHAR(50) NOT NULL CHECK (len(FirstName) >= 3), 
     LastName VARCHAR(50) NOT NULL CHECK (len(LastName) >= 3),
     Email VARCHAR(50) NOT NULL, /*Looking into check for @ character and ends in .co.uk,.com etc*/
-    CurrentPassword VARCHAR(50) NOT NULL
+    CurrentPassword VARCHAR(50) NOT NULL /*Look into hashing some ponit*/
 
     
     UNIQUE (Email),
