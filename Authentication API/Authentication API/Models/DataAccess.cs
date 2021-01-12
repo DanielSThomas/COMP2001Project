@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Authentication_API.Models
 {
     public class DataAccess
     {
-        private String Connection { get; set; }
+        public String Connection { get; set; }
+
 
         public bool Validate(User user)
         {

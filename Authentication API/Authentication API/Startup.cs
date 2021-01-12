@@ -10,14 +10,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Authentication_API.Models;
+using Authentication_API.Controllers;
 
 namespace Authentication_API
 {
     public class Startup
     {
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -26,6 +32,9 @@ namespace Authentication_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<COMP2001_DThomasContext>(options => options.UseSqlServer(Configuration.GetConnectionString("COMP2001_DB")));
+      
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,9 +52,11 @@ namespace Authentication_API
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
+            {           
                 endpoints.MapControllers();
             });
+
+            
         }
     }
 }

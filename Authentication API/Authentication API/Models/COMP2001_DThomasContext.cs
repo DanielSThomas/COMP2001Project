@@ -12,9 +12,9 @@ namespace Authentication_API.Models
         {
         }
 
-        public COMP2001_DThomasContext(DbContextOptions<COMP2001_DThomasContext> options)
-            : base(options)
+        public COMP2001_DThomasContext(DbContextOptions<COMP2001_DThomasContext> options): base(options)
         {
+
         }
 
        
@@ -31,9 +31,7 @@ namespace Authentication_API.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-
-           
+                   
 
             modelBuilder.Entity<User>(entity =>
             {
