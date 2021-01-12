@@ -17,8 +17,7 @@ namespace Authentication_API.Models
         {
         }
 
-        public virtual DbSet<Password> Passwords { get; set; }
-        public virtual DbSet<Session> Sessions { get; set; }
+       
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,40 +31,9 @@ namespace Authentication_API.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Password>(entity =>
-            {
-                entity.Property(e => e.PasswordId).HasColumnName("PasswordID");
+            
 
-                entity.Property(e => e.PreviousPassword)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.TimeChanged).HasColumnType("datetime");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Passwords)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_Passwords");
-            });
-
-            modelBuilder.Entity<Session>(entity =>
-            {
-                entity.Property(e => e.SessionId).HasColumnName("SessionID");
-
-                entity.Property(e => e.SessionTime).HasColumnType("datetime");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Sessions)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_Sessions");
-            });
+           
 
             modelBuilder.Entity<User>(entity =>
             {

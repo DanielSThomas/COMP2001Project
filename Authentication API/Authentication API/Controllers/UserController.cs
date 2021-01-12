@@ -14,6 +14,7 @@ namespace Authentication_API.Controllers
     public class UserController : ControllerBase
     {
         private readonly COMP2001_DThomasContext _context;
+        private static List<User> _users { get; set; } = new List<User>();
 
         public UserController(COMP2001_DThomasContext context)
         {
