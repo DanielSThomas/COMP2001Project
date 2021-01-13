@@ -16,6 +16,7 @@ declare @errorServerity INT
 declare @errorState INT
 
 
+
 SET XACT_ABORT ON /*Automaticly Rollback Transaction if a runtime error happens*/
    
 IF EXISTS (SELECT 1 FROM dbo.Users WHERE dbo.Users.FirstName = @newFirstName AND dbo.Users.LastName = @newLastName)
@@ -28,7 +29,8 @@ ELSE
         INSERT INTO dbo.Users (FirstName, LastName, Email, CurrentPassword)
         VALUES (@newFirstName,@newLastName, @newEmail, @newPassword)
         COMMIT TRANSACTION
-        PRINT 'Register Success'
+        PRINT 'Register Success' 
+        
         
     END TRY
 
@@ -40,14 +42,16 @@ ELSE
         RAISERROR(@errorMessage,@errorServerity,@errorState)         
     END CATCH
 
+
 GO
 
 
-EXEC dbo.usp_register 'Will3', 'Fisher3','ABadEmail7@Email.com','LookaBadW0rdAgain'
+/*EXEC dbo.usp_register 'Will19', 'Fishe198','ABadEmail179@Email.com','LookaBadW0r19Again'
 GO
 
 SELECT * FROM dbo.Users;
 
 SELECT * FROM dbo.Passwords;
 
-SELECT * FROM dbo.Sessions;
+SELECT * FROM dbo.Sessions;*/
+

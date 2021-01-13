@@ -81,15 +81,36 @@ namespace Authentication_API.Controllers
         [HttpPost]
         public IActionResult PostUser(String newFirstName, String newLastName, String newEmail, String newPassword)
         {
-
-            var something = _context.Database.ExecuteSqlRaw("EXEC usp_register @newFirstName, @newLastName, @newEmail, @newPassword, @message",
+            try
+            {
+                var storedProcedure = _context.Database.ExecuteSqlRaw("EXEC usp_register @newFirstName, @newLastName, @newEmail, @newPassword",
             new SqlParameter("@newFirstName", newFirstName),
             new SqlParameter("@newLastName", newLastName),
             new SqlParameter("@newEmail", newEmail),
-            new SqlParameter("@newPassword", newPassword),
-            new SqlParameter("@message", "test"));
+            new SqlParameter("@newPassword", newPassword));
 
-            return NoContent();
+                if (storedProcedure == 1)
+                {
+                   return Accepted("Register Successful");
+                    
+                }
+                else
+                {
+                    return NoContent();
+                }    
+
+            }
+            catch (Exception)
+            {         
+                throw;
+            }
+
+
+
+
+
+
+            
 
             // User user = new User();
 
