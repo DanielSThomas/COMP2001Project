@@ -78,8 +78,12 @@ namespace Authentication_API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser(String newFirstName, String newLastName, String newEmail, String newPassword)
         {
+
+            User user = new User(newFirstName,newLastName,newEmail,newPassword);
+
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
