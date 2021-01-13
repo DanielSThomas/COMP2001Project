@@ -15,13 +15,7 @@ namespace Authentication_API.Models
         public string Email { get; set; }
         public string CurrentPassword { get; set; }
 
-        public User(String newFirstName, String newLastName, String newEmail, String newPassword)
-        {
-            FirstName = newFirstName;
-            LastName = newLastName;
-            Email = newEmail;
-            CurrentPassword = newPassword;
-        }
+      
 
 
     }

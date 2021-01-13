@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Authentication_API.Models;
+using Microsoft.Data.SqlClient;
 
 namespace Authentication_API.Controllers
 {
@@ -78,16 +79,30 @@ namespace Authentication_API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(String newFirstName, String newLastName, String newEmail, String newPassword)
+        public IActionResult PostUser(String newFirstName, String newLastName, String newEmail, String newPassword)
         {
 
-            User user = new User(newFirstName,newLastName,newEmail,newPassword);
+            var something = _context.Database.ExecuteSqlRaw("EXEC usp_register @newFirstName, @newLastName, @newEmail, @newPassword, @message",
+            new SqlParameter("@newFirstName", newFirstName),
+            new SqlParameter("@newLastName", newLastName),
+            new SqlParameter("@newEmail", newEmail),
+            new SqlParameter("@newPassword", newPassword),
+            new SqlParameter("@message", "test"));
+
+            return NoContent();
+
+            // User user = new User();
+
+            //  user.FirstName = newFirstName;
+            //  user.LastName = newLastName;
+            //  user.Email = newEmail;
+            //  user.CurrentPassword = newPassword;
 
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            //  _context.Users.Add(user);
+            //  await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            // return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
         // DELETE: api/User/5

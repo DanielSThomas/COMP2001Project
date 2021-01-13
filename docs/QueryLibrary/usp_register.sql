@@ -7,8 +7,8 @@ CREATE PROCEDURE dbo.usp_register
 @newFirstName VARCHAR(50),
 @newLastName VARCHAR(50),
 @newEmail VARCHAR(50),
-@newPassword VARCHAR(50),
-@message VARCHAR(200) OUTPUT
+@newPassword VARCHAR(50)
+
 AS
 BEGIN TRANSACTION
 declare @errorMessage INT
@@ -21,7 +21,6 @@ SET XACT_ABORT ON /*Automaticly Rollback Transaction if a runtime error happens*
 IF EXISTS (SELECT 1 FROM dbo.Users WHERE dbo.Users.FirstName = @newFirstName AND dbo.Users.LastName = @newLastName)
     BEGIN
         PRINT 'ERROR: User Name Already Exsits In Database!'
-        SET @message = 'Register Failed : User Name Already Exsits In Database!'
         RETURN 
     END
 ELSE
@@ -29,7 +28,7 @@ ELSE
         INSERT INTO dbo.Users (FirstName, LastName, Email, CurrentPassword)
         VALUES (@newFirstName,@newLastName, @newEmail, @newPassword)
         COMMIT TRANSACTION
-        SET @message = 'Register Success'
+        PRINT 'Register Success'
         
     END TRY
 
@@ -38,14 +37,13 @@ ELSE
         SET @errorMessage = ERROR_MESSAGE()
         SET @errorServerity = ERROR_SEVERITY()
         SET @errorState = ERROR_STATE()
-        RAISERROR(@errorMessage,@errorServerity,@errorState)
-        SET @message = 'Register Failed : General Failure'           
+        RAISERROR(@errorMessage,@errorServerity,@errorState)         
     END CATCH
 
 GO
 
 
-EXEC dbo.usp_register 'Will2', 'Fisher','ABadEmail3@Email.com','LookaBadW0rdAgain',0
+EXEC dbo.usp_register 'Will3', 'Fisher3','ABadEmail7@Email.com','LookaBadW0rdAgain'
 GO
 
 SELECT * FROM dbo.Users;
