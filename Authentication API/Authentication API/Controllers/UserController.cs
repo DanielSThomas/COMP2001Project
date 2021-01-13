@@ -17,6 +17,8 @@ namespace Authentication_API.Controllers
         private readonly COMP2001_DThomasContext _context;
         private static List<User> _users { get; set; } = new List<User>();
 
+        private DataAccess dataAccess = new DataAccess();
+
         public UserController(COMP2001_DThomasContext context)
         {
             _context = context;
@@ -81,36 +83,24 @@ namespace Authentication_API.Controllers
         [HttpPost]
         public IActionResult PostUser(String newFirstName, String newLastName, String newEmail, String newPassword)
         {
-            try
+
+            User user = new User();
+            user.FirstName = newFirstName;
+            user.LastName = newLastName;
+            user.Email = newEmail;
+            user.CurrentPassword = newPassword;
+
+            if (dataAccess.Register(user, _context) == 1)
             {
-                var storedProcedure = _context.Database.ExecuteSqlRaw("EXEC usp_register @newFirstName, @newLastName, @newEmail, @newPassword",
-            new SqlParameter("@newFirstName", newFirstName),
-            new SqlParameter("@newLastName", newLastName),
-            new SqlParameter("@newEmail", newEmail),
-            new SqlParameter("@newPassword", newPassword));
-
-                if (storedProcedure == 1)
-                {
-                   return Accepted("Register Successful");
-                    
-                }
-                else
-                {
-                    return NoContent();
-                }    
-
+                return Accepted("Register Successful");
             }
-            catch (Exception)
-            {         
-                throw;
+      
+            else
+            {
+                return NoContent();
             }
 
 
-
-
-
-
-            
 
             // User user = new User();
 

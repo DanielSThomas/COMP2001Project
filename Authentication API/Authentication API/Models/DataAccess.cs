@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -22,8 +23,23 @@ namespace Authentication_API.Models
                 return true;
         }
 
-        public void Register(User user)
+        public int Register(User user, COMP2001_DThomasContext _context)
         {
+            try
+            {
+                var storedProcedure = _context.Database.ExecuteSqlRaw("EXEC usp_register @newFirstName, @newLastName, @newEmail, @newPassword",
+            new SqlParameter("@newFirstName", user.FirstName),
+            new SqlParameter("@newLastName", user.LastName),
+            new SqlParameter("@newEmail", user.Email),
+            new SqlParameter("@newPassword", user.CurrentPassword));
+
+                return storedProcedure;
+       
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
         }
 
