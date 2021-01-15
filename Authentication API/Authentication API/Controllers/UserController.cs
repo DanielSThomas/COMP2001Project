@@ -120,15 +120,16 @@ namespace Authentication_API.Controllers
 
         private String Register(User user)
         {
-            if (dataAccess.Register(user, _context) == 1)
-            {
-                return "Register Successful";                
-            }
+            //  if (dataAccess.Register(user, _context) == 1)
+            //  {
+            //      return "Register Successful";                
+            //  }
 
-            else
-            {
-                return "Register Unsuccessful";          
-            }
+            //   else
+            //  {
+            //      return "Register Unsuccessful";          
+            // }
+            return dataAccess.Register(user, _context);
 
         }
 
