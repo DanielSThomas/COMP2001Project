@@ -90,15 +90,9 @@ namespace Authentication_API.Controllers
             user.Email = newEmail;
             user.CurrentPassword = newPassword;
 
-            if (dataAccess.Register(user, _context) == 1)
-            {
-                return Accepted("Register Successful");
-            }
-      
-            else
-            {
-                return NoContent();
-            }
+           
+            return Accepted(Register(user));
+            
 
 
 
@@ -136,5 +130,23 @@ namespace Authentication_API.Controllers
         {
             return _context.Users.Any(e => e.UserId == id);
         }
+
+        private String Register(User user)
+        {
+            if (dataAccess.Register(user, _context) == 1)
+            {
+                return "Register Successful";                
+            }
+
+            else
+            {
+                return "Register Unsuccessful";          
+            }
+
+
+
+        }
+
+
     }
 }
