@@ -11,10 +11,9 @@ namespace Authentication_API.Models
 {
     public class DataAccess
     {
-        public String Connection { get; set; }
+        
 
-
-        public bool Validate(User user)
+        public bool Validate(User user, COMP2001_DThomasContext _context)
         {
             if (user.Email == "")
             {
@@ -41,7 +40,7 @@ namespace Authentication_API.Models
             new SqlParameter("@newPassword", user.CurrentPassword),
             message);
                 return message.SqlValue.ToString();
-               // return message;
+               
        
             }
             catch (Exception)
@@ -57,6 +56,7 @@ namespace Authentication_API.Models
            
             try
             {
+
                 var storedProcedure = _context.Database.ExecuteSqlRaw("EXEC dbo.usp_updateuser @userID,  @newFirstName, @newLastName, @newEmail, @newPassword",
             new SqlParameter("@userID", selecteduser),
             new SqlParameter("@newFirstName", user.FirstName),
@@ -64,7 +64,7 @@ namespace Authentication_API.Models
             new SqlParameter("@newEmail", user.Email),
             new SqlParameter("@newPassword", user.CurrentPassword));
 
-                
+         
             }
             catch (Exception)
             {
@@ -74,7 +74,7 @@ namespace Authentication_API.Models
 
         }
 
-        public void Delete(int number)
+        public void Delete(User user, int selecteduser, COMP2001_DThomasContext _context)
         {
 
         }
