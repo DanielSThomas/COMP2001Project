@@ -60,10 +60,7 @@ BEGIN CATCH
         SET @errorState = ERROR_STATE()
         RAISERROR(@errorMessage,@errorServerity,@errorState)  
 END CATCH      
-
-        
-GO
-SELECT * FROM dbo.Users;
+ 
 
 
 

@@ -43,8 +43,24 @@ namespace Authentication_API.Models
 
         }
 
-        public void Update(User user, int number)
+        public void UpdateUser(User user, int selecteduser, COMP2001_DThomasContext _context)
         {
+            try
+            {
+                var storedProcedure = _context.Database.ExecuteSqlRaw("EXEC dbo.usp_updateuser @userID,  @newFirstName, @newLastName, @newEmail, @newPassword",
+            new SqlParameter("@userID", selecteduser),
+            new SqlParameter("@newFirstName", user.FirstName),
+            new SqlParameter("@newLastName", user.LastName),
+            new SqlParameter("@newEmail", user.Email),
+            new SqlParameter("@newPassword", user.CurrentPassword));
+
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
         }
 

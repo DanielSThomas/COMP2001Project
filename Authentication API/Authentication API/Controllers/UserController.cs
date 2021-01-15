@@ -49,32 +49,17 @@ namespace Authentication_API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public IActionResult PutUser(int id, String newFirstName, String newLastName, String newEmail, String newPassword)
         {
-            if (id != user.UserId)
-            {
-                return BadRequest();
-            }
+            User user = new User();
+            user.FirstName = newFirstName;
+            user.LastName = newLastName;
+            user.Email = newEmail;
+            user.CurrentPassword = newPassword;
 
-            _context.Entry(user).State = EntityState.Modified;
+            dataAccess.UpdateUser(user, id, _context);
+            return Accepted("Update Successful on User: " + id);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
         // POST: api/User
