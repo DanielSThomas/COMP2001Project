@@ -59,7 +59,7 @@ namespace Authentication_API.Models
             catch (Exception)
             {
 
-                throw;
+               throw;
             }
 
         }

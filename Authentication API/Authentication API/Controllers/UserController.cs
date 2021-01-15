@@ -52,9 +52,18 @@ namespace Authentication_API.Controllers
         public IActionResult PutUser(int id, String firstName, String lastName, String email, String password)
         {
             User user = new User();
+            user.UserId = id;
+
+            if(firstName != null)
             user.FirstName = firstName;
+
+            if(lastName != null)
             user.LastName = lastName;
+
+            if(email != null)
             user.Email = email;
+
+            if(password != null)
             user.CurrentPassword = password;
 
             dataAccess.UpdateUser(user, id, _context);
