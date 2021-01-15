@@ -90,24 +90,10 @@ namespace Authentication_API.Controllers
             user.Email = newEmail;
             user.CurrentPassword = newPassword;
 
-           
+
             return Accepted(Register(user));
-            
 
 
-
-            // User user = new User();
-
-            //  user.FirstName = newFirstName;
-            //  user.LastName = newLastName;
-            //  user.Email = newEmail;
-            //  user.CurrentPassword = newPassword;
-
-
-            //  _context.Users.Add(user);
-            //  await _context.SaveChangesAsync();
-
-            // return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
         // DELETE: api/User/5
@@ -131,6 +117,13 @@ namespace Authentication_API.Controllers
             return _context.Users.Any(e => e.UserId == id);
         }
 
+        private bool GetValidation (User user)
+        {
+
+            return false;
+        }
+    
+
         private String Register(User user)
         {
             if (dataAccess.Register(user, _context) == 1)
@@ -142,8 +135,6 @@ namespace Authentication_API.Controllers
             {
                 return "Register Unsuccessful";          
             }
-
-
 
         }
 
