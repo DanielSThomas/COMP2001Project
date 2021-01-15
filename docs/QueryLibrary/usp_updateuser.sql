@@ -64,11 +64,7 @@ END CATCH
         
 GO
 SELECT * FROM dbo.Users;
-GO
-EXEC dbo.usp_updateuser 2, '','Thomas','',''
-GO
 
-SELECT * FROM dbo.Users;
 
 
 
