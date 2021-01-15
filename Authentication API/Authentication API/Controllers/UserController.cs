@@ -49,13 +49,13 @@ namespace Authentication_API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public IActionResult PutUser(int id, String newFirstName, String newLastName, String newEmail, String newPassword)
+        public IActionResult PutUser(int id, String firstName, String lastName, String email, String password)
         {
             User user = new User();
-            user.FirstName = newFirstName;
-            user.LastName = newLastName;
-            user.Email = newEmail;
-            user.CurrentPassword = newPassword;
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.Email = email;
+            user.CurrentPassword = password;
 
             dataAccess.UpdateUser(user, id, _context);
             return Accepted("Update Successful on User: " + id);
@@ -66,14 +66,14 @@ namespace Authentication_API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public IActionResult PostUser(String newFirstName, String newLastName, String newEmail, String newPassword)
+        public IActionResult PostUser(String firstName, String lastName, String email, String password)
         {
 
             User user = new User();
-            user.FirstName = newFirstName;
-            user.LastName = newLastName;
-            user.Email = newEmail;
-            user.CurrentPassword = newPassword;
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.Email = email;
+            user.CurrentPassword = password;
 
 
             return Accepted(Register(user));
