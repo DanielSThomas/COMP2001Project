@@ -1,4 +1,4 @@
-/*Customer Visit Count Trigger*/
+/*Login Count Trigger*/
 IF OBJECT_ID('dbo.trg_UserLoginCount') IS NOT NULL
     DROP PROCEDURE dbo.trg_UserLoginCount
 GO

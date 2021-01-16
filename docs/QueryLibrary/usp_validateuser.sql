@@ -27,8 +27,10 @@ declare @currentPassword VARCHAR (50)
 
         SELECT @currentPassword = currentPassword From dbo.Users
         WHERE UserID = @i
+
         SELECT @currentEmail = email FROM dbo.Users
         Where UserID = @i
+        
         if(@email = @currentEmail and @password = @currentPassword)
         BEGIN
         PRINT 'User Validated'

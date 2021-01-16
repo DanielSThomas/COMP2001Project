@@ -16,8 +16,10 @@ declare @errorState INT
 SET XACT_ABORT ON /*Automaticly Rollback Transaction if a runtime error happens*/
 
 BEGIN TRY
-
-    DELETE FROM dbo.Users WHERE UserID = @userID;
+    DELETE FROM dbo.Sessions WHERE UserID = @userID
+    DELETE FROM dbo.Passwords WHERE UserID = @userID
+    DELETE FROM dbo.LoginCounter WHERE UserID = @userID
+    DELETE FROM dbo.Users WHERE UserID = @userID
 COMMIT TRANSACTION
 END TRY
 
