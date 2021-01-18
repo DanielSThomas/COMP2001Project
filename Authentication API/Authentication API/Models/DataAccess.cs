@@ -74,9 +74,11 @@ namespace Authentication_API.Models
 
         }
 
-        public void Delete(User user, int selecteduser, COMP2001_DThomasContext _context)
+        public void Delete(int selecteduser, COMP2001_DThomasContext _context)
         {
-
+            var storedProcedure = _context.Database.ExecuteSqlRaw("EXEC dbo.usp_deleteuser @userID",
+           new SqlParameter("@userID", selecteduser));
+                          
         }
 
     }

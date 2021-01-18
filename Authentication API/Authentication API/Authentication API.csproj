@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Authentication_API</RootNamespace>
+    <UserSecretsId>4387def0-b291-4de4-9166-c120169b7f97</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -45,6 +45,7 @@ BEGIN TRY
 
     IF (@newPassword IS NOT NULL AND @newPassword != '')
      BEGIN
+        
         UPDATE dbo.Users
         SET CurrentPassword = @newPassword
         WHERE UserID = @userID

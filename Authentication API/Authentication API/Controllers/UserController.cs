@@ -92,18 +92,15 @@ namespace Authentication_API.Controllers
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public IActionResult DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            dataAccess.Delete(id, _context);
 
-            return user;
+
+
+
+            return Accepted("User " + id + " deleted");
         }
 
         private bool UserExists(int id)
