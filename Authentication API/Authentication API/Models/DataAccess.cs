@@ -15,12 +15,31 @@ namespace Authentication_API.Models
 
         public bool Validate(User user, COMP2001_DThomasContext _context)
         {
-            if (user.Email == "")
+            SqlParameter returnvalue = new SqlParameter("@returnvalue", SqlDbType.Int);
+            
+            returnvalue.Direction = ParameterDirection.Output;
+            returnvalue.Size = 4000;
+
+            var storedProcedure = _context.Database.ExecuteSqlRaw("EXEC usp_validateuser @email, @password, @returnvalue OUT",   
+           new SqlParameter("@email", user.Email),
+           new SqlParameter("@password", user.CurrentPassword), returnvalue);
+
+            try
             {
-                return false;
+                if (returnvalue.SqlValue.ToString().Equals("1"))
+                {
+                    return true;
+                }
+                else
+                    return false;
             }
-            else
-                return true;
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+            
         }
 
         public string Register(User user, COMP2001_DThomasContext _context)

@@ -5,7 +5,8 @@ GO
 
 CREATE PROCEDURE dbo.usp_validateuser
 @email VARCHAR(50),
-@password VARCHAR(50)
+@password VARCHAR(50),
+@validated INT NULL OUT 
 
 AS
 declare @errorMessage INT
@@ -34,12 +35,14 @@ declare @currentPassword VARCHAR (50)
         if(@email = @currentEmail and @password = @currentPassword)
         BEGIN
         PRINT 'User Validated'
+        SET @validated = 1
         RETURN 1
         END
         
         END
         
         PRINT 'Incorrect Email or Password'   
+        SET @validated = 0
         RETURN 0
     END TRY
 
@@ -54,4 +57,4 @@ declare @currentPassword VARCHAR (50)
 
 GO
 
-EXEC dbo.usp_validateuser 'Johnny@email.com', 'Password123'
+EXEC dbo.usp_validateuser 'Johnny@email.com', 'Password123',''

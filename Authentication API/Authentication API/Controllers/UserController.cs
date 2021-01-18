@@ -26,9 +26,20 @@ namespace Authentication_API.Controllers
 
         // GET: api/User
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public IActionResult ValidateUser(String email, String password)
         {
-            return await _context.Users.ToListAsync();
+            User user = new User();
+
+            user.Email = email;
+            user.CurrentPassword = password;
+            if (GetValidation(user) == true)
+            {
+                return Ok("User Valid"); 
+            }
+            else return Unauthorized("User Invalid");
+
+
+
         }
 
         // GET: api/User/5
@@ -67,7 +78,7 @@ namespace Authentication_API.Controllers
             user.CurrentPassword = password;
 
             dataAccess.UpdateUser(user, id, _context);
-            return Accepted("Update Successful on User: " + id);
+            return NoContent();
 
         }
 
@@ -85,7 +96,7 @@ namespace Authentication_API.Controllers
             user.CurrentPassword = password;
 
 
-            return Accepted(Register(user));
+            return Ok(Register(user));
 
 
         }
@@ -100,32 +111,22 @@ namespace Authentication_API.Controllers
 
 
 
-            return Accepted("User " + id + " deleted");
+            return NoContent();
         }
 
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.UserId == id);
-        }
 
         private bool GetValidation (User user)
         {
-
-            return false;
+            if (dataAccess.Validate(user, _context) == true)
+                return true;
+            else
+                return false;
         }
     
 
         private String Register(User user)
         {
-            //  if (dataAccess.Register(user, _context) == 1)
-            //  {
-            //      return "Register Successful";                
-            //  }
-
-            //   else
-            //  {
-            //      return "Register Unsuccessful";          
-            // }
+          
             return dataAccess.Register(user, _context);
 
         }
