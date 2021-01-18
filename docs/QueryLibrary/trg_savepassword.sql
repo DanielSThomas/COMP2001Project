@@ -9,16 +9,27 @@ AFTER UPDATE
 AS
 BEGIN
 declare @UserID INT
-declare @Password VARCHAR(50)
+declare @OldPassword VARCHAR(50)
+declare @NewPassword VARCHAR(50)
 
 SET NOCOUNT ON;
 
 SELECT @UserID = UserID from inserted
-SELECT @Password = CurrentPassword from deleted
+SELECT @OldPassword = CurrentPassword from deleted
+SELECT @NewPassword = CurrentPassword from inserted
 
+if (@OldPassword = @NewPassword)
+BEGIN
+RETURN
+END
+
+if (@NewPassword = '')
+BEGIN
+RETURN
+END
 
 INSERT INTO dbo.Passwords(UserID,PreviousPassword,TimeChanged)
-VALUES(@UserID,@Password,CURRENT_TIMESTAMP)
+VALUES(@UserID,@OldPassword,CURRENT_TIMESTAMP)
 
 END
 
