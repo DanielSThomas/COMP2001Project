@@ -34,6 +34,8 @@ declare @currentPassword VARCHAR (50)
         
         if(@email = @currentEmail and @password = @currentPassword)
         BEGIN
+        INSERT INTO dbo.Sessions (UserID, SessionTime)
+        VALUES (@i, CURRENT_TIMESTAMP)
         PRINT 'User Validated'
         SET @validated = 1
         RETURN 1
