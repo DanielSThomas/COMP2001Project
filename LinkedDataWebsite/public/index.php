@@ -1,6 +1,7 @@
-
+<!DOCTYPE html>
+<html>
 <head>
-    <title>Bootstrap Test</title>
+    <title>LinkedDataSite</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,7 +19,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home Page</a></li>
-            <li><a href="data.php">Data</a></li>
+            <li><a href="data.php">Readable Data</a></li>
         </ul>
     </div>
 </nav>
@@ -46,9 +47,13 @@
 </div>
 
 <div class="container text-center">
-    <h3>Original Data: </h3>
-    <p>link to data</p>
+
+
+    <h4>Attributions:</h4>
+    <p>Bootstrap 3.4.1 & Jquery 3.5.1</p>
+    <p>Original Data: https://plymouth.thedata.place/dataset/crime</p>
 </div>
 
 </body>
 
+</html>
