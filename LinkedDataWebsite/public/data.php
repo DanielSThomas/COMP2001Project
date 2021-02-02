@@ -22,19 +22,19 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">Linked Data Site</a>
+            <a class="navbar-brand" href="index.php">Crime in Plymouth</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="index.php">Home Page</a></li>
             <li class="active"><a href="data.php">Readable Data</a></li>
+            <li><a href="../crime/index.php">Machine Data</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="jumbotron">
     <div class="container text-center">
-        <h1>Linked Data</h1>
-        <p>Here is where the data should be</p>
+        <h1>Readable Data</h1>
     </div>
 </div>
 
