@@ -45,7 +45,7 @@
     <?php print <<< HERE
   <table style="width:100%">
 HERE;
-    $data = file("http://localhost/LinkedDataWebsite/crime/resources_summary-of-all-offences-2003-2015.csv");
+    $data = file("../crime/resources_summary-of-all-offences-2003-2015.csv");
     foreach ($data as $line){
         $lineArray = explode(",", $line);
         list($Offence, $Year2003, $Year2004, $Year2005, $Year2006, $Year2007, $Year2008, $Year2009, $Year2010, $Year2011, $Year2012, $Year2013, $Year2014, $Year2015) = $lineArray;
